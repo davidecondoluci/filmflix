@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Search from "./components/Search";
+import Card from "./components/Card"; // Assicurati che questo percorso sia corretto
 
 const API_URL = "http://www.omdbapi.com/?apikey=652f2e5d";
 
@@ -26,11 +27,16 @@ const App = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div>
-        <h1 className="text-center text-3xl font-bold mb-6">Movie Storage</h1>
-        <Search searchInput={handleSearchInput} />
-      </div>
+    <div className="flex flex-col">
+      <header className="sticky top-0 bg-white">
+        <h1 className="text-2xl font-bold">Titolo</h1>
+        <Search handleSearchInput={handleSearchInput} />
+      </header>
+      <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {movies.map((movie, index) => (
+          <Card key={index} movie={movie} />
+        ))}
+      </main>
     </div>
   );
 };
