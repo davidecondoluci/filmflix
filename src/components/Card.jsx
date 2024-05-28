@@ -6,7 +6,6 @@ const Card = ({ movie }) => {
       <img className="w-full" src={movie.Poster} alt={movie.Title} />
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{movie.Title}</div>
-        <p className="text-gray-700 text-base">{movie.Year}</p>
       </div>
     </div>
   );

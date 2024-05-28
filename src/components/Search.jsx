@@ -2,7 +2,7 @@ import React from "react";
 
 function Search({ handleSearchInput }) {
   const handleSubmit = (e) => {
-    e.preventDefault(); // previene il refresh della pagina
+    e.preventDefault();
   };
 
   return (
