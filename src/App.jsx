@@ -26,9 +26,11 @@ const App = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <h1 className="text-3xl font-bold text-gray-800 mb-8">Movie Storage</h1>
-      <Search searchInput={handleSearchInput} />
+    <div className="flex justify-center items-center h-screen">
+      <div>
+        <h1 className="text-center text-3xl font-bold mb-6">Movie Storage</h1>
+        <Search searchInput={handleSearchInput} />
+      </div>
     </div>
   );
 };
