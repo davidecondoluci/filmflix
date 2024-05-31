@@ -1,6 +1,6 @@
 import React from "react";
 
-const Card = ({ movie }) => {
+const Card = ({ movie, onClick }) => {
   const posterPath = movie.poster_path
     ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
     : null;
@@ -22,7 +22,10 @@ const Card = ({ movie }) => {
   );
 
   return (
-    <div className="rounded overflow-hidden shadow-lg p-4 bg-white">
+    <div
+      className="rounded overflow-hidden shadow-lg p-4 bg-white cursor-pointer"
+      onClick={onClick}
+    >
       {poster}
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{movie.title}</div>
