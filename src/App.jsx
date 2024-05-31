@@ -2,24 +2,33 @@ import React, { useState, useEffect, useRef } from "react";
 import Search from "./components/Search";
 import Card from "./components/Card";
 
-const API_URL = "http://www.omdbapi.com/?i=tt3896198&apikey=652f2e5d";
+const API_URL = "https://api.themoviedb.org/3/search/movie";
+const API_KEY = "b840e1a61a744a8817986c3df5b9c489";
 
 const App = () => {
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [error, setError] = useState("");
   const searchRef = useRef(null);
+  const resultsRef = useRef(null);
 
   useEffect(() => {
     const searchMovies = async () => {
       if (searchTerm.trim() !== "") {
-        const response = await fetch(`${API_URL}&s=${searchTerm}`);
+        const url = `${API_URL}?query=${searchTerm}&api_key=${API_KEY}`;
+        const response = await fetch(url);
         const data = await response.json();
-        setMovies(data.Search || []);
-        searchRef.current.scrollIntoView({ behavior: "smooth" });
-        document.body.classList.remove("overflow-hidden");
+        if (response.ok) {
+          setMovies(data.results || []);
+          setError("");
+          resultsRef.current.scrollIntoView({ behavior: "smooth" });
+        } else {
+          setError(data.status_message);
+          setMovies([]);
+        }
       } else {
         setMovies([]);
-        document.body.classList.add("overflow-hidden");
+        setError("");
       }
     };
 
@@ -32,27 +41,23 @@ const App = () => {
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
-      <header className="w-1/2 text-center p-4">
-        <h1 className="text-2xl font-bold">Welcome to Movie Search App</h1>
+      <header className="w-1/2 text-center pt-8">
+        <h1 className="text-2xl font-bold">
+          Welcome to FilmFlix, a Movie Storage App
+        </h1>
         <p>
-          This application allows you to search any type of movies. I use the
-          OMDB API to fetch the data and React to create the app. Simply type
-          the name of the movie in the search bar below and get all the
-          information you need.
+          This application allows you to search for your favorite movies. We use
+          the TMDb API to fetch the data. Simply type the name of the movie in
+          the search bar below and get all the information you need.
         </p>
       </header>
-      <div
-        ref={searchRef}
-        className="sticky top-0 bg-white w-full flex justify-center mb-4"
-      >
+      <div className="sticky top-0 w-full flex flex-col items-center bg-white">
         <Search handleSearchInput={handleSearchInput} />
+        {error && <p className="text-red-500 text-sm">{error}</p>}
       </div>
       <main
-        className={`grid ${
-          movies.length === 0
-            ? "hidden"
-            : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full p-4"
-        }`}
+        ref={resultsRef}
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-8 px-8"
       >
         {movies.map((movie, index) => (
           <Card key={index} movie={movie} />
