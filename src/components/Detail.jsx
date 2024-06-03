@@ -56,17 +56,6 @@ const Detail = ({ movie, onClose }) => {
                 Genres: {details.genres.map((genre) => genre.name).join(", ")}
               </p>
               <p className="mb-4">Overview: {details.overview}</p>
-              {reviews.length > 0 && (
-                <div>
-                  <h3 className="text-xl font-bold mb-2">Reviews:</h3>
-                  {reviews.map((review) => (
-                    <div key={review.id} className="mb-2">
-                      <p className="font-semibold">{review.author}</p>
-                      <p>{review.content}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
           </>
         )}
