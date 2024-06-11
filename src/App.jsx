@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Search from "./components/Search";
 import Card from "./components/Card";
 import Detail from "./components/Detail";
+import "./App.css";
 
 const API_URL = "https://api.themoviedb.org/3/search/movie";
 const API_KEY = "b840e1a61a744a8817986c3df5b9c489";
@@ -151,7 +152,7 @@ const App = () => {
         >
           {logoToShow}
         </div>
-        <h1 className="text-2xl font-bold mt-4">
+        <h1 className="text-2xl font-sans font-bold mt-4">
           Welcome to FilmFlix, a Movie Storage App
         </h1>
         <p>
