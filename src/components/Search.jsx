@@ -13,17 +13,19 @@ function Search({ handleSearchInput, searchTerm }) {
   };
 
   return (
-    <form className="w-full max-w-sm py-4" onSubmit={handleSubmit}>
-      <div className="flex items-center">
-        <input
-          className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-100 rounded py-4 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-          type="text"
-          placeholder="Search for a Movie..."
-          onChange={handleChange}
-          value={inputValue}
-        />
-      </div>
-    </form>
+    <div className="sticky top-0 w-full flex flex-col items-center bg-white">
+      <form className="w-1/4 py-4" onSubmit={handleSubmit}>
+        <div className="flex items-center">
+          <input
+            className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-100 rounded py-4 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            type="text"
+            placeholder="Search for a Movie..."
+            onChange={handleChange}
+            value={inputValue}
+          />
+        </div>
+      </form>
+    </div>
   );
 }
 

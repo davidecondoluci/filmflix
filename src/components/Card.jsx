@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { IoHeartCircle } from "react-icons/io5";
 
 const Card = ({ movie, onClick }) => {
   const posterPath = movie.poster_path
@@ -23,13 +24,14 @@ const Card = ({ movie, onClick }) => {
 
   return (
     <div
-      className="rounded overflow-hidden shadow-lg p-4 bg-white cursor-pointer"
+      className="rounded overflow-hidden shadow-md p-4 bg-white cursor-pointer"
       onClick={onClick}
     >
-      {poster}
-      <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{movie.title}</div>
+      <div>
+        {poster}
+        <IoHeartCircle />
       </div>
+      <div className="font-bold text-xl py-4">{movie.title}</div>
     </div>
   );
 };

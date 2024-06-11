@@ -6,7 +6,11 @@ const LogoutButton = () => {
   const handleLogout = () => {
     logout();
   };
-  return <button onClick={handleLogout}>Logout</button>;
+  return (
+    <button onClick={handleLogout} className="hover:underline">
+      Logout
+    </button>
+  );
 };
 
 export default LogoutButton;
