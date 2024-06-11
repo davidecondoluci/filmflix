@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Search from "../components/Search";
 import Card from "../components/Card";
 import Detail from "../components/Detail";
@@ -11,7 +11,6 @@ const Archive = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState("");
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const resultsRef = useRef(null);
 
   useEffect(() => {
     const storedMovies = JSON.parse(localStorage.getItem("movies"));
@@ -48,7 +47,6 @@ const Archive = () => {
         if (response.ok) {
           setMovies(data.results || []);
           setError("");
-          resultsRef.current.scrollIntoView({ behavior: "smooth" });
         } else {
           setError(data.status_message);
           setMovies([]);
@@ -90,10 +88,7 @@ const Archive = () => {
         <Search handleSearchInput={handleSearchInput} searchTerm={searchTerm} />
         {error && <p className="text-red-500 text-sm">{error}</p>}
       </div>
-      <main
-        ref={resultsRef}
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-8 px-8"
-      >
+      <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-8 px-8">
         {movies.map((movie, index) => (
           <Card
             key={index}

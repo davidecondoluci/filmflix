@@ -1,12 +1,8 @@
 import { Outlet } from "react-router-dom";
 
 const Layout = () => {
-  const style = {
-    border: "8px solid blue",
-    minHeight: "100svh",
-  };
   return (
-    <div style={style}>
+    <div className="border-8 border-blue-500 min-h-screen">
       <Outlet />
     </div>
   );
