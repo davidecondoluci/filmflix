@@ -24,7 +24,7 @@ const Detail = ({ movie, onClose }) => {
   console.log(reviews);
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-20 bg-black bg-opacity-50 flex items-center justify-center">
       <div className="bg-white p-8 rounded shadow-lg relative w-3/4 max-w-3xl flex">
         <button
           className="absolute top-2 right-2 text-xl font-bold"

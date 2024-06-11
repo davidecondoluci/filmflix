@@ -13,7 +13,7 @@ function Search({ handleSearchInput, searchTerm }) {
   };
 
   return (
-    <div className="sticky top-0 w-full flex flex-col items-center bg-white">
+    <div className="sticky top-0 z-10 w-full flex flex-col items-center bg-white">
       <form className="w-1/4 py-4" onSubmit={handleSubmit}>
         <div className="flex items-center">
           <input

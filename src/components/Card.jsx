@@ -27,9 +27,9 @@ const Card = ({ movie, onClick }) => {
       className="rounded overflow-hidden shadow-md p-4 bg-white cursor-pointer"
       onClick={onClick}
     >
-      <div>
+      <div className="relative z-0">
         {poster}
-        <IoHeartCircle />
+        <IoHeartCircle className="absolute top-0 right-0 text-4xl text-white m-2 drop-shadow-md" />
       </div>
       <div className="font-bold text-xl py-4">{movie.title}</div>
     </div>
