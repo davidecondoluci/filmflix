@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 import Search from "../components/Search";
 import Card from "../components/Card";
 import Detail from "../components/Detail";
@@ -10,33 +11,6 @@ const Archive = () => {
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState("");
-  const [selectedMovie, setSelectedMovie] = useState(null);
-
-  useEffect(() => {
-    const storedMovies = JSON.parse(localStorage.getItem("movies"));
-    const storedSearchTerm = localStorage.getItem("searchTerm");
-    const storedSelectedMovie = JSON.parse(
-      localStorage.getItem("selectedMovie")
-    );
-
-    if (storedMovies) {
-      setMovies(storedMovies);
-    }
-
-    if (storedSearchTerm) {
-      setSearchTerm(storedSearchTerm);
-    }
-
-    if (storedSelectedMovie) {
-      setSelectedMovie(storedSelectedMovie);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("movies", JSON.stringify(movies));
-    localStorage.setItem("searchTerm", searchTerm);
-    localStorage.setItem("selectedMovie", JSON.stringify(selectedMovie));
-  }, [movies, searchTerm, selectedMovie]);
 
   useEffect(() => {
     const searchMovies = async () => {
@@ -64,13 +38,7 @@ const Archive = () => {
     setSearchTerm(e.target.value);
   };
 
-  const handleCardClick = (movie) => {
-    setSelectedMovie(movie);
-  };
-
-  const handleClosePopup = () => {
-    setSelectedMovie(null);
-  };
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
@@ -93,12 +61,12 @@ const Archive = () => {
           <Card
             key={index}
             movie={movie}
-            onClick={() => handleCardClick(movie)}
+            onClick={() => setSelectedMovie(movie)}
           />
         ))}
       </main>
       {selectedMovie && (
-        <Detail movie={selectedMovie} onClose={handleClosePopup} />
+        <Detail movie={selectedMovie} onClose={() => setSelectedMovie(null)} />
       )}
     </div>
   );
