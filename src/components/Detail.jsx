@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-
-const API_KEY = "b840e1a61a744a8817986c3df5b9c489";
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 
 const Detail = ({ movie, onClose }) => {
   const [details, setDetails] = useState(null);
@@ -8,7 +7,9 @@ const Detail = ({ movie, onClose }) => {
 
   useEffect(() => {
     const fetchDetails = async () => {
-      const url = `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${API_KEY}&append_to_response=videos,credits,reviews`;
+      const url = `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${
+        import.meta.env.VITE_MOVIE_API_KEY
+      }&append_to_response=videos,credits,reviews`;
       const response = await fetch(url);
       const data = await response.json();
       setDetails(data);
@@ -19,6 +20,8 @@ const Detail = ({ movie, onClose }) => {
 
     fetchDetails();
   }, [movie.id]);
+
+  console.log(reviews);
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
@@ -65,3 +68,8 @@ const Detail = ({ movie, onClose }) => {
 };
 
 export default Detail;
+
+Detail.propTypes = {
+  movie: PropTypes.object.isRequired,
+  onClose: PropTypes.func.isRequired,
+};

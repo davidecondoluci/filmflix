@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: "Outfit";
   src: url("/fonts/Outfit-Thin.woff2") format("woff2"),
