@@ -4,9 +4,6 @@ import Search from "../components/Search";
 import Card from "../components/Card";
 import Detail from "../components/Detail";
 
-const API_URL = "https://api.themoviedb.org/3/search/movie";
-const API_KEY = "b840e1a61a744a8817986c3df5b9c489";
-
 const Archive = () => {
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,7 +12,9 @@ const Archive = () => {
   useEffect(() => {
     const searchMovies = async () => {
       if (searchTerm.trim() !== "") {
-        const url = `${API_URL}?query=${searchTerm}&api_key=${API_KEY}`;
+        const url = `${
+          import.meta.env.VITE_MOVIE_API_URL
+        }?query=${searchTerm}&api_key=${import.meta.env.VITE_MOVIE_API_KEY}`;
         const response = await fetch(url);
         const data = await response.json();
         if (response.ok) {
