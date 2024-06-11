@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { createContext, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "./useLocalStorage";
@@ -35,4 +36,8 @@ export const AuthProvider = ({ children }) => {
 
 export const useAuth = () => {
   return useContext(AuthContext);
+};
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

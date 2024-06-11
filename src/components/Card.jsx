@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 
 const Card = ({ movie, onClick }) => {
   const posterPath = movie.poster_path
@@ -35,3 +35,8 @@ const Card = ({ movie, onClick }) => {
 };
 
 export default Card;
+
+Card.propTypes = {
+  movie: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
