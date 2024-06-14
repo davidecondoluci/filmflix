@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 import { IoHeartCircle } from "react-icons/io5";
+import { supabase } from "../utils/supabaseClient";
+import { useAuth } from "../hooks/useAuth";
 
 const Card = ({ movie, onClick }) => {
   const posterPath = movie.poster_path
@@ -22,18 +24,31 @@ const Card = ({ movie, onClick }) => {
     </div>
   );
 
+  const { user } = useAuth();
+
+  const handleWishlistClick = async () => {
+    const { status, error } = await supabase
+      .from("wishlist")
+      .insert({ film_id: movie.id, user_id: user.id });
+
+    console.log(status, error);
+  };
+
   return (
-    <div
-      className="rounded overflow-hidden shadow-md p-4 bg-white cursor-pointer"
-      onClick={onClick}
-    >
-      <div className="relative z-0">
-        {poster}
-        <button className="absolute top-0 right-0 text-4xl text-white m-2 drop-shadow-md">
-          <IoHeartCircle />
-        </button>
+    <div className="relative">
+      <button
+        className="absolute top-0 right-0 text-4xl text-white m-2 drop-shadow-md"
+        onClick={() => handleWishlistClick()}
+      >
+        <IoHeartCircle />
+      </button>
+      <div
+        className="rounded overflow-hidden shadow-md p-4 bg-white cursor-pointer "
+        onClick={() => onClick()}
+      >
+        <div>{poster}</div>
+        <div className="font-bold text-xl py-4">{movie.title}</div>
       </div>
-      <div className="font-bold text-xl py-4">{movie.title}</div>
     </div>
   );
 };
