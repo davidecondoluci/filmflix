@@ -29,7 +29,7 @@ const Card = ({ movie, onClick }) => {
   const handleWishlistClick = async () => {
     const { status, error } = await supabase
       .from("wishlist")
-      .insert({ film_id: movie.id, user_id: user.id });
+      .insert({ movie_id: movie.id, user_id: user.id });
 
     console.log(status, error);
   };
