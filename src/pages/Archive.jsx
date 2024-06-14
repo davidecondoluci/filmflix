@@ -4,6 +4,7 @@ import Search from "../components/Search";
 import Card from "../components/Card";
 import Detail from "../components/Detail";
 import Logo from "../components/Logo";
+import useScrollBlock from "../hooks/useScrollBlock";
 
 const Archive = () => {
   const [movies, setMovies] = useState([]);
@@ -39,6 +40,14 @@ const Archive = () => {
   };
 
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [blockScroll, allowScroll] = useScrollBlock();
+  useEffect(() => {
+    if (selectedMovie) {
+      blockScroll();
+    } else {
+      allowScroll();
+    }
+  }, [selectedMovie, blockScroll, allowScroll]);
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center pt-24">

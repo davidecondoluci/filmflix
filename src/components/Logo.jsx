@@ -7,7 +7,7 @@ const Logo = () => {
       fill="none"
       viewBox="0 0 199 40"
     >
-      <g clip-path="url(#a)">
+      <g clipPath="url(#a)">
         <path fill="#7C4DFF" d="M30 18.4H3.6V40H14V27H30v-8.6Z" />
         <path
           fill="#607D8B"
