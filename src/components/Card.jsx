@@ -51,8 +51,7 @@ const Card = ({ movie, onClick }) => {
   }, [user, movie.id]);
 
   const handleWishlistToggle = async (event) => {
-    event.stopPropagation(); // Evita la propagazione dell'evento al genitore
-
+    event.stopPropagation();
     if (!user) {
       return;
     }

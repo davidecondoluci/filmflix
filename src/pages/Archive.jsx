@@ -57,7 +57,7 @@ const Archive = () => {
         <h1>
           <Logo />
         </h1>
-        <h2 className="text-2xl font-sans font-bold mt-4">
+        <h2 className="text-2xl font-sans font-bold">
           Welcome to FilmFlix, a Movie Storage App
         </h2>
         <p>
