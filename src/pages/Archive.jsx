@@ -51,7 +51,7 @@ const Archive = () => {
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center pt-24">
-      <header className="flex flex-col w-1/2 text-center justify-center items-center space-y-4">
+      <header className="flex flex-col lg:w-1/2 text-center justify-center items-center p-8 space-y-4">
         <h1>
           <Logo />
         </h1>

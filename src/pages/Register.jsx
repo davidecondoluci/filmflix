@@ -1,32 +1,32 @@
 import { useState } from "react";
-
 import { supabase } from "../utils/supabaseClient";
-
 import Logo from "../components/Logo";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
 
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
     });
+
     if (error) {
-      console.log(error.message);
+      setError(error.message);
     } else {
       console.log("Registration successful");
-
       alert("Registration successful");
     }
   };
 
   return (
-    <div className="flex h-screen justify-center items-center bg-gray">
-      <div className="flex flex-col w-1/3 h-2/3 justify-center items-center p-8 rounded space-y-8 bg-white">
+    <div className="flex h-screen justify-center items-center p-8 bg-gray">
+      <div className="flex flex-col w-full lg:w-1/3 lg:h-2/3 justify-center items-center p-8 rounded space-y-8 bg-white">
         <div className="flex flex-col justify-center items-center space-y-8">
           <h1>
             <Logo />
@@ -42,7 +42,7 @@ const Register = () => {
             <input
               id="email"
               type="text"
-              className="block w-full rounded border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray placeholder:text-gray focus:ring-2 focus:ring-inset focus:ring-purple"
+              className="block w-full rounded border border-gray-300 py-2 px-3 text-gray-900 shadow-sm focus:outline-none focus:border-purple focus:ring-1 focus:ring-purple placeholder:text-gray-400"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -52,7 +52,7 @@ const Register = () => {
             <input
               id="password"
               type="password"
-              className="block w-full rounded border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray placeholder:text-gray focus:ring-2 focus:ring-inset focus:ring-purple"
+              className="block w-full rounded border border-gray-300 py-2 px-3 text-gray-900 shadow-sm focus:outline-none focus:border-purple focus:ring-1 focus:ring-purple placeholder:text-gray-400"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -61,6 +61,7 @@ const Register = () => {
             Register
           </button>
         </form>
+        {error && <p className="text-red-500 mt-4">{error}</p>}
       </div>
     </div>
   );
