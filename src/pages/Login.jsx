@@ -16,14 +16,15 @@ const Login = () => {
       email,
       password,
     });
-    await login(data.user);
 
     if (error) {
       alert(error.message);
     } else {
+      await login(data.user);
       console.log("Logged in successfully");
     }
   };
+
   return (
     <div className="flex h-screen justify-center items-center p-8 bg-gray">
       <div className="flex flex-col w-full lg:w-1/3 lg:h-2/3 justify-center items-center p-8 rounded space-y-8 bg-white">
@@ -42,7 +43,7 @@ const Login = () => {
             <input
               id="email"
               type="text"
-              className="block w-full rounded border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray placeholder:text-gray focus:ring-2 focus:ring-inset focus:ring-purple"
+              className="block w-full rounded border border-gray-300 py-2 px-3 text-gray-900 shadow-sm focus:outline-none focus:border-purple focus:ring-1 focus:ring-purple placeholder:text-gray-400"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -52,7 +53,7 @@ const Login = () => {
             <input
               id="password"
               type="password"
-              className="block w-full rounded border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray placeholder:text-gray focus:ring-2 focus:ring-inset focus:ring-purple"
+              className="block w-full rounded border border-gray-300 py-2 px-3 text-gray-900 shadow-sm focus:outline-none focus:border-purple focus:ring-1 focus:ring-purple placeholder:text-gray-400"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
