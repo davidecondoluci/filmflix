@@ -17,7 +17,7 @@ const Card = ({ movie, onClick }) => {
     />
   ) : (
     <div
-      className="w-full bg-gray-200 text-center flex items-center justify-center"
+      className="w-full bg-gray text-center flex items-center justify-center"
       style={{ aspectRatio: "2 / 3" }}
     >
       Poster not found
@@ -37,13 +37,13 @@ const Card = ({ movie, onClick }) => {
   return (
     <div className="relative">
       <button
-        className="absolute top-0 right-0 text-4xl text-white m-2 drop-shadow-md"
+        className="absolute top-4 right-4 text-4xl text-white drop-shadow-md"
         onClick={() => handleWishlistClick()}
       >
         <IoHeartCircle />
       </button>
       <div
-        className="rounded overflow-hidden shadow-md p-4 bg-white cursor-pointer "
+        className="rounded overflow-hidden shadow-md p-4 bg-white cursor-pointer"
         onClick={() => onClick()}
       >
         <div>{poster}</div>
