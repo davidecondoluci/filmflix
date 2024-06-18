@@ -23,11 +23,7 @@ const Card = ({ movie, onClick }) => {
       Poster not found
     </div>
   );
-  console.log("pp", posterPath);
-  console.log("p", poster);
   const { user } = useAuth();
-
-  let post;
 
   const handleWishlistClick = async () => {
     const { status, error } = await supabase
