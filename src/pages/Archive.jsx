@@ -16,7 +16,9 @@ const Archive = () => {
       if (searchTerm.trim() !== "") {
         const url = `${
           import.meta.env.VITE_MOVIE_API_URL
-        }?query=${searchTerm}&api_key=${import.meta.env.VITE_MOVIE_API_KEY}`;
+        }/search/movie?query=${searchTerm}&api_key=${
+          import.meta.env.VITE_MOVIE_API_KEY
+        }`;
         const response = await fetch(url);
         const data = await response.json();
         if (response.ok) {

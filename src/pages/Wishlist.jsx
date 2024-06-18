@@ -18,8 +18,6 @@ const Wishlist = () => {
     fetchWishlist();
   }, []);
 
-  console.log(wishlist);
-
   return (
     <div className="flex flex-col justify-center pt-24">
       <h1 className="text-2xl font-bold px-8">My Wishlist</h1>

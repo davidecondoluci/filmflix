@@ -4,11 +4,11 @@ import { supabase } from "../utils/supabaseClient";
 import { useAuth } from "../hooks/useAuth";
 
 const Card = ({ movie, onClick }) => {
-  const posterPath = movie.poster
+  const posterPath = movie.poster_path
     ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
     : null;
 
-  /*  const poster = posterPath ? (
+  const poster = posterPath ? (
     <img
       className="w-full"
       src={posterPath}
@@ -22,12 +22,12 @@ const Card = ({ movie, onClick }) => {
     >
       Poster not found
     </div>
-  ); */
+  );
   console.log("pp", posterPath);
-
-  const url = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-
+  console.log("p", poster);
   const { user } = useAuth();
+
+  let post;
 
   const handleWishlistClick = async () => {
     const { status, error } = await supabase
@@ -49,8 +49,7 @@ const Card = ({ movie, onClick }) => {
         className="rounded overflow-hidden shadow-md p-4 bg-white cursor-pointer"
         onClick={() => onClick()}
       >
-        <div></div>
-        <img className="h-2/3 w-1/2" src={url} alt="" />
+        <div>{poster}</div>
         <div className="font-bold text-xl py-4">{movie.title}</div>
       </div>
     </div>
