@@ -11,6 +11,7 @@ export default {
         transparent: "transparent",
         black: "#000000",
         gray: "#607D8B",
+        lightgray: "#ACC5CF",
         purple: "#7C4DFF",
       },
     },
