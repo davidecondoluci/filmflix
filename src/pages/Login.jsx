@@ -39,7 +39,7 @@ const Login = () => {
           className="flex flex-col w-full justify-center space-y-4"
         >
           <div className="flex flex-col">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Email:</label>
             <input
               id="email"
               type="text"
@@ -49,7 +49,7 @@ const Login = () => {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Password:</label>
             <input
               id="password"
               type="password"
