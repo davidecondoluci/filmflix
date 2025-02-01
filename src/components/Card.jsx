@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { IoHeartCircle } from "react-icons/io5";
-import { supabase } from "../utils/supabaseClient";
+import { db } from "../utils/firebaseClient"; // Corretto import
 import { useAuth } from "../hooks/useAuth";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  addDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 
 const Card = ({ movie, onClick }) => {
   const posterPath = movie.poster_path
@@ -26,24 +35,26 @@ const Card = ({ movie, onClick }) => {
   );
 
   const { user } = useAuth();
+  const [isInWishlist, setIsInWishlist] = useState(false);
+  const [wishlistDocId, setWishlistDocId] = useState(null); // Per salvare l'ID del documento in Firestore
 
-  const [isInWishlist, setIsInWishlist] = React.useState(false);
-
-  React.useEffect(() => {
+  useEffect(() => {
     const checkWishlist = async () => {
       if (user) {
-        const { data, error } = await supabase
-          .from("wishlist")
-          .select()
-          .eq("movie_id", movie.id)
-          .eq("user_id", user.id);
+        const q = query(
+          collection(db, "wishlist"),
+          where("movie_id", "==", movie.id),
+          where("user_id", "==", user.uid)
+        );
+        const querySnapshot = await getDocs(q);
 
-        if (error) {
-          console.error("Error fetching wishlist:", error.message);
-          return;
+        if (!querySnapshot.empty) {
+          setIsInWishlist(true);
+          setWishlistDocId(querySnapshot.docs[0].id); // Salva l'ID del documento
+        } else {
+          setIsInWishlist(false);
+          setWishlistDocId(null);
         }
-
-        setIsInWishlist(data.length > 0);
       }
     };
 
@@ -57,25 +68,23 @@ const Card = ({ movie, onClick }) => {
     }
 
     if (isInWishlist) {
-      const { error } = await supabase
-        .from("wishlist")
-        .delete()
-        .match({ movie_id: movie.id, user_id: user.id });
-
-      if (error) {
-        console.error("Error removing from wishlist:", error.message);
-      } else {
+      try {
+        await deleteDoc(doc(db, "wishlist", wishlistDocId));
         setIsInWishlist(false);
+        setWishlistDocId(null);
+      } catch (error) {
+        console.error("Error removing from wishlist:", error.message);
       }
     } else {
-      const { error } = await supabase
-        .from("wishlist")
-        .insert([{ movie_id: movie.id, user_id: user.id }]);
-
-      if (error) {
-        console.error("Error adding to wishlist:", error.message);
-      } else {
+      try {
+        const docRef = await addDoc(collection(db, "wishlist"), {
+          movie_id: movie.id,
+          user_id: user.uid,
+        });
         setIsInWishlist(true);
+        setWishlistDocId(docRef.id);
+      } catch (error) {
+        console.error("Error adding to wishlist:", error.message);
       }
     }
   };

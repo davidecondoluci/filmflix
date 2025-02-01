@@ -2,7 +2,8 @@ import PropTypes from "prop-types";
 import { createContext, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "./useLocalStorage";
-import { supabase } from "../utils/supabaseClient";
+import { auth } from "../utils/firebaseClient"; // ⬅️ Cambiato da "firebase" a "auth"
+import { signOut } from "firebase/auth"; // ⬅️ Importiamo signOut da Firebase
 
 const AuthContext = createContext();
 
@@ -10,16 +11,16 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useLocalStorage("user", null);
   const navigate = useNavigate();
 
-  // call this function when you want to authenticate the user
+  // Funzione login (da implementare con Firebase)
   const login = async (data) => {
     setUser(data);
     navigate("/wishlist");
   };
 
-  // call this function to sign out logged in user
+  // Funzione logout con Firebase
   const logout = async () => {
     setUser(null);
-    await supabase.auth.signOut();
+    await signOut(auth); // ⬅️ Ora usiamo signOut correttamente
     navigate("/", { replace: true });
   };
 
@@ -31,6 +32,7 @@ export const AuthProvider = ({ children }) => {
     }),
     [user]
   );
+
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 

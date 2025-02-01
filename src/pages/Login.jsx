@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
-import { supabase } from "../utils/supabaseClient";
-
+import { auth } from "../utils/firebaseClient"; // ⬅️ Cambiato da "firebase" a "auth"
+import { signInWithEmailAndPassword } from "firebase/auth"; // ⬅️ Metodo corretto di Firebase
 import Logo from "../components/Logo";
 
 const Login = () => {
@@ -12,16 +12,17 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      await login(user);
+      console.log("Logged in successfully", user);
+    } catch (error) {
       alert(error.message);
-    } else {
-      await login(data.user);
-      console.log("Logged in successfully");
     }
   };
 

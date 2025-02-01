@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { supabase } from "../utils/supabaseClient";
+import { auth } from "../utils/firebaseClient"; // ⬅️ Cambiato da "firebase" a "auth"
+import { createUserWithEmailAndPassword } from "firebase/auth"; // ⬅️ Metodo corretto di Firebase
 import Logo from "../components/Logo";
 
 const Register = () => {
@@ -11,16 +12,16 @@ const Register = () => {
     e.preventDefault();
     setError(null);
 
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
-
-    if (error) {
-      setError(error.message);
-    } else {
-      console.log("Registration successful");
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log("Registration successful", userCredential.user);
       alert("Registration successful");
+    } catch (error) {
+      setError(error.message);
     }
   };
 
