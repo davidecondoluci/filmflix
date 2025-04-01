@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
         {
-            "src": "package.json",
+            "src": "vite.config.js",
             "use": "@vercel/static-build",
             "config": {
                 "distDir": "dist"
@@ -11,8 +11,24 @@
     ],
     "routes": [
         {
+            "src": "/assets/(.*)",
+            "headers": {
+                "cache-control": "public, max-age=31536000, immutable"
+            },
+            "continue": true
+        },
+        {
             "src": "/(.*)",
-            "dest": "/index.html"
+            "dest": "/",
+            "headers": {
+                "Content-Type": "text/html; charset=utf-8"
+            }
+        }
+    ],
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/index.html"
         }
     ]
 }
