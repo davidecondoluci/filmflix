@@ -6,7 +6,7 @@ const Layout = () => {
   const { user } = useAuth();
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       <div className="absolute flex w-full p-4 border-b border-black justify-between bg-white">
         <div className="flex items-center gap-x-4">
           <a href="/" className="hover:underline">

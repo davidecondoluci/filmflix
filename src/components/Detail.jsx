@@ -25,10 +25,10 @@ const Detail = ({ movie, onClose }) => {
   console.log(reviews);
 
   return (
-    <div className="fixed inset-0 z-20 flex items-center justify-center p-4 bg-black bg-opacity-50">
+    <div className="fixed inset-0 z-20 flex items-center justify-center p-4 bg-black/50">
       <div className="relative flex flex-col w-full max-h-full pt-10 overflow-y-auto bg-white rounded shadow-lg lg:flex-row lg:w-3/4 lg:pt-0">
         <button
-          className="absolute z-10 text-3xl top-3 right-3"
+          className="absolute z-10 text-3xl cursor-pointer top-3 right-3"
           onClick={onClose}
         >
           <IoCloseCircleOutline />
