@@ -25,30 +25,33 @@ const Detail = ({ movie, onClose }) => {
   console.log(reviews);
 
   return (
-    <div className="flex fixed inset-0 z-20 bg-black bg-opacity-50 items-center justify-center">
-      <div className="flex flex-col lg:flex-row h-full lg:h-fit justify-start lg:items-start items-center bg-white p-8 rounded shadow-lg relative lg:w-3/4 space-x-4">
-        <button className="absolute top-2 right-2 text-3xl" onClick={onClose}>
+    <div className="fixed inset-0 z-20 flex items-center justify-center p-4 bg-black bg-opacity-50">
+      <div className="relative flex flex-col w-full max-h-full pt-10 overflow-y-auto bg-white rounded shadow-lg lg:flex-row lg:w-3/4 lg:pt-0">
+        <button
+          className="absolute z-10 text-3xl top-3 right-3"
+          onClick={onClose}
+        >
           <IoCloseCircleOutline />
         </button>
         {details && (
           <>
-            <div className="flex w-full lg:w-1/3 container">
+            <div className="flex-shrink-0 w-1/2 mx-auto lg:w-1/3 lg:mx-0 lg:p-4">
               {details.poster_path ? (
                 <img
-                  className="w-full h-auto"
+                  className="block w-full h-auto rounded lg:rounded-l lg:rounded-r-none"
                   src={`https://image.tmdb.org/t/p/w500${details.poster_path}`}
                   alt={details.title}
                 />
               ) : (
                 <div
-                  className="w-full bg-gray text-center flex items-center justify-center"
+                  className="flex items-center justify-center w-full text-center bg-gray-200 rounded-t lg:rounded-l lg:rounded-t-none"
                   style={{ aspectRatio: "2 / 3" }}
                 >
                   Poster not found
                 </div>
               )}
             </div>
-            <div className="w-2/3 space-y-4">
+            <div className="w-full p-6 space-y-4 text-left lg:w-2/3">
               <h2 className="text-2xl font-bold">{details.title}</h2>
               <p>Release Date: {details.release_date}</p>
               <p>Runtime: {details.runtime} minutes</p>
